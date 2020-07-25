@@ -1,0 +1,66 @@
+Assignment 2 Report
+
+Name:   Sarthak Jagdish Dadhakar
+
+1.      Describe how you evaluated your baseline and advanced features:
+
+->      a. Tried few different dev sets by moving different sets of ~25% data as dev data to make sure that my Algortihm is not just performing for a single dev set.
+            -   wrote a script to randomly take 25% of data as Dev Data
+        b. I calculated the average accuracies.
+        
+
+
+2.      Accuracy of baseline features during your evaluation:
+
+->      a. Accuracy for last 25% Data as Dev : 72.002% -> Used this data set as suggested in Piaaza Post @301
+        b. Average Accuracy for Baseline Features after trying different datasets : ~72.8510%
+
+
+3.      Describe your advanced feature set:
+
+->      Baseline Features:
+            Speaker_Change=True/False
+            Tokens
+            POS
+            No_Words
+        
+        Additional Features:
+            -   First_Utterance=True/False: True only for First Utterance, False for others.
+            -   POS tag Counts in the current Utterances.
+            -   Appended 'Text' of utterance instead of "No_Words" if token is blank.
+            -   Sub_Utterance_Count: The Count of Utterance by Same Speaker.
+            -   Included last 3 characters from text:   "/"     = end of complete unit				
+                                                        "-/"    = end of cut-off unit				
+                                                        Neither = unit continues to next turn by same speaker 			
+                                                        Refernece - Annontation Manual - http://web.stanford.edu/~jurafsky/ws97/manual.august1.html
+            -   cut_off=True/False:  Based on above Description.
+            -   end_unit=True/False: Based on above Description.
+            -   contains_question_mark=True/False: If there is Question Mark in 'Text'
+            -   Data from Previous 3 Utterance: Backward Looking Function   
+                (4-gram)                        Reference - DAMSL Manual - https://www.cs.rochester.edu/research/cisd/resources/damsl/RevisedManual/
+                                                Included POS Tags, Last 3 Characters, contains_question_mark, cut_off, end_unit
+                                       
+
+4.      If you tried and rejected alternate advanced feature sets, please describe them:
+
+->      I tried several other features on different datasets as mentioned eariler. The Features that I tried and rejected:
+        a. contains_exclamation_mark=True/False
+        b. Data from Next Utterance:    Forward Looking Function   
+                                        Reference - https://www.cs.rochester.edu/research/cisd/resources/damsl/RevisedManual/
+                                        Included POS Tags, Last 3 Characters, contains_question_mark, cut_off, end_unit
+        c. Last_Utterance=True/False
+        d. transcription_error=True/False:  Refernece - Annontation Manual - http://web.stanford.edu/~jurafsky/ws97/manual.august1.html 
+                                            'Text' contains "[[" and "]]" if there was Transcription Error
+                                            Used this feature to see if there was any corrleation between to transcription error and a particular act_tag
+                                            This dropped accuracies for almost all the versions of dataset
+        e. Converted token to lower case
+        f. Removed Tokens with , and .
+        g. Length of the utterance text
+        h. Data from Previous 1,2,4 Utterance: Backward Looking Function (2-gram, 3-gram, 5-gram): Accuracy Increased for 2-gram, 3-gram. 
+           It was maximum for 4-gram and declined for 5-gram. Hence, I have included 4-gram in my advanced features.
+        
+5.      Accuracy of advanced features was:
+        
+->      a. Accuracy for last 25% Data as Dev : 77.33% -> Used this data set as suggested in Piaaza Post @301
+        b. Average Accuracy for Baseline Features after trying different datasets :  ~77.80%   
+        
