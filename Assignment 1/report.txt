@@ -1,7 +1,6 @@
 Assignment 1 Report
 
 Name: Sarthak Dadhakar
-USC ID: 6259027388
 
 1. Performance on the development data with 100% of the training data
 1a. spam precision: 0.9931
